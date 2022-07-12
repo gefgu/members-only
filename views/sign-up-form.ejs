@@ -72,5 +72,14 @@
         <button type="submit">Sign in</button>
       </div>
     </form>
+    <% if (errors) { %>
+
+    <ul>
+      <% errors.forEach(error => { %>
+      <li><%- error.msg %></li>
+      <% }) %>
+    </ul>
+
+    <% } %>
   </body>
 </html>

@@ -46,7 +46,7 @@ router.post("/sign-up", [
     });
 
     if (!errors.isEmpty()) {
-      res.render("sign-up-form", { title: "Sign Up", errors: errors });
+      res.render("sign-up-form", { title: "Sign Up", errors: errors.array() });
     } else {
       bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
         if (err) return next(err);
