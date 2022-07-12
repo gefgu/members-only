@@ -1,6 +1,8 @@
 var express = require("express");
 var router = express.Router();
 const { body, validationResult, check } = require("express-validator");
+const User = require("../models/user");
+const bcrypt = require("bcryptjs");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -8,7 +10,7 @@ router.get("/", function (req, res, next) {
 });
 
 router.get("/sign-up", (req, res) =>
-  res.render("sign-up-form", { title: "Sign Up" })
+  res.render("sign-up-form", { title: "Sign Up", errors: undefined })
 );
 
 router.post("/sign-up", [
@@ -35,9 +37,26 @@ router.post("/sign-up", [
     .custom((value, { req }) => value === req.body.password),
   (req, res, next) => {
     const errors = validationResult(req);
-    console.log(req.body);
-    console.log(errors);
-    res.redirect("/");
+    const user = new User({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      username: req.body.username,
+      password: req.body.password,
+      membershipStatus: req.body.membershipStatus,
+    });
+
+    if (!errors.isEmpty()) {
+      res.render("sign-up-form", { title: "Sign Up", errors: errors });
+    } else {
+      bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
+        if (err) return next(err);
+        user.password = hashedPassword;
+        user.save((err) => {
+          if (err) return next(err);
+          res.redirect("/");
+        });
+      });
+    }
   },
 ]);
 
