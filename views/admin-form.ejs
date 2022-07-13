@@ -1,27 +1,35 @@
-<%- include("header", {title: title})  %> 
-    <h1><%= title %></h1>
-    <form action="" method="post">
-      <div>
-        <label for="title">Passcode</label>
-        <input
-          type="password"
-          name="passcode"
-          id="passcode"
-          placeholder="passcode"
-          required
-        />
-      </div>
-      <div>
-        <button type="submit">Become Admin</button>
-      </div>
-    </form>
-    <% if (errors) { %>
+<%- include("header", {title: title}) %>
+<div class="py-4 px-8 xl:px-64 2xl:px-96">
+  <h1 class="text-3xl my-8"><%= title %></h1>
+  <form action="" method="post" class="flex flex-col gap-8">
+    <div class="flex items-center gap-4">
+      <label for="title"><strong>Passcode: </strong></label>
+      <input
+        type="password"
+        name="passcode"
+        id="passcode"
+        placeholder="Passcode"
+        class="border rounded p-2 w-full"
+        required
+      />
+    </div>
+    <div class="w-full px-4 flex justify-end">
+      <button
+        type="submit"
+        class="border rounded p-2 px-4 bg-slate-50 hover:bg-slate-100 active:bg-slate-200"
+      >
+        Become Admin
+      </button>
+    </div>
+  </form>
+  <% if (errors) { %>
 
-    <ul>
-      <% errors.forEach(error => { %>
-      <li><%- error.msg %></li>
-      <% }) %>
-    </ul>
+  <ul class="list-disc">
+    <% errors.forEach(error => { %>
+    <li><%- error.msg %></li>
+    <% }) %>
+  </ul>
 
-    <% } %>
-<%- include("footer")  %> 
+  <% } %>
+</div>
+<%- include("footer") %>

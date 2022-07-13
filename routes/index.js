@@ -167,7 +167,7 @@ router.post("/member", [
 ]);
 
 router.get("/admin", (req, res) => {
-  if (req.user?.membershipStatus !== "member") res.redirect("/");
+  // if (req.user?.membershipStatus !== "member") res.redirect("/");
   res.render("admin-form", { title: "Become Admin", errors: undefined });
 });
 
