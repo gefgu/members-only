@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 const { body, validationResult, check } = require("express-validator");
 const User = require("../models/user");
+const Message = require("../models/message");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 
@@ -78,5 +79,33 @@ router.post(
 router.get("/new-message", (req, res) =>
   res.render("message-form", { title: "Message Form", errors: undefined })
 );
+
+router.post("/new-message", [
+  body("title", "Title must be specified").trim().isLength({ min: 1 }).escape(),
+  body("content", "Message content must be specified")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  (req, res, next) => {
+    const errors = validationResult(req);
+    const message = new Message({
+      title: req.body.title,
+      content: req.body.content,
+      timestamp: new Date(),
+      author: req.user,
+    });
+    if (!errors.isEmpty()) {
+      res.render("message-form", {
+        title: "Message Form",
+        errors: errors.array(),
+      });
+    } else {
+      message.save((err) => {
+        if (err) next(err);
+        res.redirect("/");
+      });
+    }
+  },
+]);
 
 module.exports = router;
