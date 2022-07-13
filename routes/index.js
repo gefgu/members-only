@@ -37,14 +37,16 @@ router.post("/sign-up", [
     .trim()
     .isLength({ min: 1 })
     .escape(),
-  check("username", "Username is already used").custom((value) => {
-    User.findOne({ username: value }, (err, user) => {
-      if (err) return done(err);
-      if (!user) {
-        return true;
-      } else {
-        return false;
-      }
+  body("username", "Username already in use").custom((value) => {
+    return new Promise((resolve, reject) => {
+      User.findOne({ username: value }, (err, user) => {
+        console.log(err, user);
+        if (err) return done(err);
+        if (user) {
+          reject();
+        }
+        resolve();
+      });
     });
   }),
   check("password", "Password must have a minimum of 8 characters").isLength({
@@ -167,7 +169,7 @@ router.post("/member", [
 ]);
 
 router.get("/admin", (req, res) => {
-  // if (req.user?.membershipStatus !== "member") res.redirect("/");
+  if (req.user?.membershipStatus !== "member") res.redirect("/");
   res.render("admin-form", { title: "Become Admin", errors: undefined });
 });
 
