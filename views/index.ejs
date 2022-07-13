@@ -15,6 +15,9 @@
     <% } %> <% if (currentUser?.membershipStatus === "visitor") { %>
     <a href="/member">Become member</a>
     <% } %>
+    <% if (currentUser?.membershipStatus === "member") { %>
+      <a href="/admin">Become Admin</a>
+      <% } %>
     <div>
       <% messages.forEach(message => { %>
       <div>

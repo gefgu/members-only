@@ -148,4 +148,32 @@ router.post("/member", [
   },
 ]);
 
+router.get("/admin", (req, res) => {
+  if (req.user?.membershipStatus !== "member") res.redirect("/");
+  res.render("admin-form", { title: "Become Admin", errors: undefined });
+});
+
+router.post("/admin", [
+  check("passcode", "Passcode is incorrect")
+    .exists()
+    .custom((value, { req }) => value === process.env.ADMIN_PASSCODE),
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.render("admin-form", {
+        title: "Become Admin",
+        errors: errors.array(),
+      });
+    } else {
+      let newUser = req.user;
+      newUser.membershipStatus = "admin";
+      User.findByIdAndUpdate(newUser._id, newUser, {}, function (err) {
+        if (err) return next(err);
+
+        res.redirect("/");
+      });
+    }
+  },
+]);
+
 module.exports = router;
