@@ -27,6 +27,9 @@
         <p>Author: <%= message.author.username %></p>
         <p>Date: <%= message.date %></p>
         <% } %>
+        <% if (currentUser?.membershipStatus === "admin") { %>
+         <a href=<%- `/message/${message._id}/delete` %> >Delete Message</a>
+        <% } %>
       </div>
       <% }) %>
     </div>
