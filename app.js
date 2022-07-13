@@ -9,6 +9,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcryptjs");
 const mongoose = require("mongoose");
+const User = require("./models/user");
 
 const mongoDb = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.blyci.mongodb.net/members_only?retryWrites=true&w=majority`;
 mongoose.connect(mongoDb, { useNewURLParser: true, useUnifiedTopology: true });
