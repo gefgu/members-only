@@ -11,7 +11,7 @@ router.get("/", function (req, res, next) {
   Message.find({}, "title content timestamp author")
     .populate("author")
     .exec((err, messages) => {
-      res.render("index", { title: "Members Only", messages: messages });
+      res.render("index", { title: "Cosmere Club", messages: messages });
     });
 });
 

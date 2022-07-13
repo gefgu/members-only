@@ -1,47 +1,39 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <form action="" method="post">
-      <div>
-        <label for="username">Username</label>
-        <input
-          type="text"
-          name="username"
-          id="username"
-          placeholder="username"
-          autocomplete="username"
-          required
-        />
-      </div>
-      <div>
-        <label for="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          placeholder="Password"
-          autocomplete="new-password"
-          required
-        />
-      </div>
+<%- include("header", {title: title}) %>
+<h1><%= title %></h1>
+<form action="" method="post">
+  <div>
+    <label for="username">Username</label>
+    <input
+      type="text"
+      name="username"
+      id="username"
+      placeholder="username"
+      autocomplete="username"
+      required
+    />
+  </div>
+  <div>
+    <label for="password">Password</label>
+    <input
+      type="password"
+      name="password"
+      id="password"
+      placeholder="Password"
+      autocomplete="new-password"
+      required
+    />
+  </div>
 
-      <div>
-        <button type="submit">Log In</button>
-      </div>
-    </form>
-    <% if (errors) { %>
+  <div>
+    <button type="submit">Log In</button>
+  </div>
+</form>
+<% if (errors) { %>
 
-    <ul>
-      <% errors.forEach(error => { %>
-      <li><%- error %></li>
-      <% }) %>
-    </ul>
+<ul>
+  <% errors.forEach(error => { %>
+  <li><%- error %></li>
+  <% }) %>
+</ul>
 
-    <% } %>
-  </body>
-</html>
+<% } %> <%- include("footer") %>

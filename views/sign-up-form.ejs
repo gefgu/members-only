@@ -1,88 +1,95 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-  </head>
-  <body>
-    <h1>Sign Up</h1>
-    <form action="" method="post">
-      <div>
-        <label for="firstName">First Name</label>
-        <input
-          type="text"
-          name="firstName"
-          id="firstName"
-          placeholder="First Name"
-          required
-          <%- user && `value="${user.firstName}"` %> 
-        />
-      </div>
-      <div>
-        <label for="lastName">Last Name</label>
-        <input
-          type="text"
-          name="lastName"
-          id="lastName"
-          placeholder="Last Name"
-          required
-          <%- user && `value="${user.lastName}"` %> 
-        />
-      </div>
-      <div>
-        <label for="username">Username</label>
-        <input
-          type="text"
-          name="username"
-          id="username"
-          placeholder="username"
-          autocomplete="username"
-          required
-          <%- user && `value="${user.username}"` %> 
-        />
-      </div>
-      <div>
-        <label for="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          placeholder="Password"
-          autocomplete="new-password"
-          required
-        />
-      </div>
-      <div>
-        <label for="confirmPassword">Confirm Password</label>
-        <input
-          type="password"
-          name="confirmPassword"
-          id="confirmPassword"
-          placeholder="Confirm Password"
-          required
-        />
-      </div>
-      <div>
-        <input
-          type="hidden"
-          name="membershipStatus"
-          id="membershipStatus"
-          value="visitor"
-          required
-        />
-      </div>
-      <div>
-        <button type="submit">Sign in</button>
-      </div>
-    </form>
-    <% if (errors) { %>
+<%- include("header", {title: title}) %>
+<h1>Sign Up</h1>
+<form action="" method="post">
+  <div>
+    <label for="firstName">First Name</label>
+    <input
+      type="text"
+      name="firstName"
+      id="firstName"
+      placeholder="First Name"
+      required
+      <%-
+      user
+      &&
+      `value="${user.firstName}"
+      `
+      %>
+    />
+  </div>
+  <div>
+    <label for="lastName">Last Name</label>
+    <input
+      type="text"
+      name="lastName"
+      id="lastName"
+      placeholder="Last Name"
+      required
+      <%-
+      user
+      &&
+      `value="${user.lastName}"
+      `
+      %>
+    />
+  </div>
+  <div>
+    <label for="username">Username</label>
+    <input
+      type="text"
+      name="username"
+      id="username"
+      placeholder="username"
+      autocomplete="username"
+      required
+      <%-
+      user
+      &&
+      `value="${user.username}"
+      `
+      %>
+    />
+  </div>
+  <div>
+    <label for="password">Password</label>
+    <input
+      type="password"
+      name="password"
+      id="password"
+      placeholder="Password"
+      autocomplete="new-password"
+      required
+    />
+  </div>
+  <div>
+    <label for="confirmPassword">Confirm Password</label>
+    <input
+      type="password"
+      name="confirmPassword"
+      id="confirmPassword"
+      placeholder="Confirm Password"
+      required
+    />
+  </div>
+  <div>
+    <input
+      type="hidden"
+      name="membershipStatus"
+      id="membershipStatus"
+      value="visitor"
+      required
+    />
+  </div>
+  <div>
+    <button type="submit">Sign in</button>
+  </div>
+</form>
+<% if (errors) { %>
 
-    <ul>
-      <% errors.forEach(error => { %>
-      <li><%- error.msg %></li>
-      <% }) %>
-    </ul>
+<ul>
+  <% errors.forEach(error => { %>
+  <li><%- error.msg %></li>
+  <% }) %>
+</ul>
 
-    <% } %>
-  </body>
-</html>
+<% } %> <%- include("footer") %>
