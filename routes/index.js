@@ -19,7 +19,7 @@ router.get("/sign-up", (req, res) =>
   res.render("sign-up-form", { title: "Sign Up", errors: undefined })
 );
 
-// Add prevention of equal username
+// TODO: Add prevention of equal username
 router.post("/sign-up", [
   body("firstName", "First Name Mmst be specified")
     .trim()
@@ -112,5 +112,9 @@ router.post("/new-message", [
     }
   },
 ]);
+
+router.get("/member", (req, res) =>
+  res.render("member-form", { title: "Become member", errors: undefined })
+);
 
 module.exports = router;

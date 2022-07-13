@@ -11,6 +11,8 @@
     <a href="/log-in">Log In</a>
     <% if (currentUser) { %>
     <a href="/new-message">Create New Message</a>
+    <% } %> <% if (currentUser.membershipStatus === "visitor") { %>
+    <a href="/member">Become member</a>
     <% } %>
     <div>
       <% messages.forEach(message => { %>
