@@ -19,7 +19,6 @@ router.get("/sign-up", (req, res) =>
   res.render("sign-up-form", { title: "Sign Up", errors: undefined })
 );
 
-// TODO: Add prevention of equal username
 router.post("/sign-up", [
   body("firstName", "First Name Mmst be specified")
     .trim()
@@ -138,7 +137,7 @@ router.get("/member", (req, res) => {
 router.post("/member", [
   check("passcode", "Passcode is incorrect")
     .exists()
-    .custom((value, { req }) => value === process.env.MEMBER_PASSCODE),
+    .custom((value) => value === process.env.MEMBER_PASSCODE),
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
