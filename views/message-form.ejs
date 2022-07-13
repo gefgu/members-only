@@ -1,25 +1,41 @@
 <%- include("header", {title: title}) %>
-<h1><%= title %></h1>
-<form action="" method="post">
-  <div>
-    <label for="title">Title</label>
-    <input type="text" name="title" id="title" placeholder="Title" required />
-  </div>
-  <div>
-    <label for="content">Text</label>
-    <textarea required name="content" id="content" placeholder="Message">
-    </textarea>
-  </div>
-  <div>
-    <button type="submit">Add message</button>
-  </div>
-</form>
-<% if (errors) { %>
+<div class="py-4 px-8 xl:px-64 2xl:px-96">
+  <h1 class="text-3xl my-8"><%= title %></h1>
+  <form action="" method="post" class="flex flex-col gap-8">
+    <div class="flex items-start gap-4">
+      <label for="title"> <strong>Title:</strong></label>
+      <input
+        class="border rounded p-2 w-full"
+        type="text"
+        name="title"
+        id="title"
+        placeholder="Title"
+        required
+      />
+    </div>
+    <div class="flex items-start gap-4">
+      <label for="content"><strong>Text:</strong></label>
+      <textarea
+        class="border rounded p-2 w-full"
+        rows="10"
+        required
+        name="content"
+        id="content"
+        placeholder="Message"
+      >
+      </textarea>
+    </div>
+    <div class="w-full px-4 flex justify-end">
+      <button type="submit" class="border rounded p-2 px-4 bg-slate-50 hover:bg-slate-100 active:bg-slate-200">Add message</button>
+    </div>
+  </form>
+  <% if (errors) { %>
 
-<ul>
-  <% errors.forEach(error => { %>
-  <li><%- error.msg %></li>
-  <% }) %>
-</ul>
+  <ul>
+    <% errors.forEach(error => { %>
+    <li><%- error.msg %></li>
+    <% }) %>
+  </ul>
+</div>
 
 <% } %> <%- include("footer") %>
