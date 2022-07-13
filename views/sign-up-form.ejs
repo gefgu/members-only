@@ -15,6 +15,7 @@
           id="firstName"
           placeholder="First Name"
           required
+          <%- user && `value="${user.firstName}"` %> 
         />
       </div>
       <div>
@@ -25,6 +26,7 @@
           id="lastName"
           placeholder="Last Name"
           required
+          <%- user && `value="${user.lastName}"` %> 
         />
       </div>
       <div>
@@ -36,6 +38,7 @@
           placeholder="username"
           autocomplete="username"
           required
+          <%- user && `value="${user.username}"` %> 
         />
       </div>
       <div>

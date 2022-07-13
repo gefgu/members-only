@@ -16,7 +16,11 @@ router.get("/", function (req, res, next) {
 });
 
 router.get("/sign-up", (req, res) =>
-  res.render("sign-up-form", { title: "Sign Up", errors: undefined })
+  res.render("sign-up-form", {
+    title: "Sign Up",
+    errors: undefined,
+    user: undefined,
+  })
 );
 
 router.post("/sign-up", [
@@ -62,7 +66,11 @@ router.post("/sign-up", [
     });
 
     if (!errors.isEmpty()) {
-      res.render("sign-up-form", { title: "Sign Up", errors: errors.array() });
+      res.render("sign-up-form", {
+        title: "Sign Up",
+        errors: errors.array(),
+        user: user,
+      });
     } else {
       bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
         if (err) return next(err);
