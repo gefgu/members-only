@@ -19,6 +19,10 @@
       <div>
         <h2><%= message.title %></h2>
         <p><%= message.content %></p>
+        <% if (currentUser?.membershipStatus === "member") { %>
+        <p>Author: <%= message.author.username %></p>
+        <p>Date: <%= message.date %></p>
+        <% } %>
       </div>
       <% }) %>
     </div>
