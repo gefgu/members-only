@@ -9,6 +9,7 @@ const passport = require("passport");
 /* GET home page. */
 router.get("/", function (req, res, next) {
   Message.find({}, "title content timestamp author")
+    .sort("-timestamp")
     .populate("author")
     .exec((err, messages) => {
       res.render("index", { title: "Cosmere Club", messages: messages });
