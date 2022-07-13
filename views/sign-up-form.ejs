@@ -1,7 +1,8 @@
 <%- include("header", {title: title}) %>
-<h1>Sign Up</h1>
-<form action="" method="post">
-  <div>
+<div class="py-4 px-8 xl:px-64 2xl:px-96">
+  <h1 class="text-3xl my-8">Sign Up</h1>
+<form action="" method="post" class="flex flex-col gap-8">
+<div class="flex items-center gap-4">
     <label for="firstName">First Name</label>
     <input
       type="text"
@@ -9,6 +10,7 @@
       id="firstName"
       placeholder="First Name"
       required
+      class="border rounded p-2"
       <%-
       user
       &&
@@ -17,10 +19,11 @@
       %>
     />
   </div>
-  <div>
+  <div class="flex items-center gap-4">
     <label for="lastName">Last Name</label>
     <input
       type="text"
+      class="border rounded p-2"
       name="lastName"
       id="lastName"
       placeholder="Last Name"
@@ -33,13 +36,14 @@
       %>
     />
   </div>
-  <div>
+  <div class="flex items-center gap-4">
     <label for="username">Username</label>
     <input
       type="text"
+      class="border rounded p-2 "
       name="username"
       id="username"
-      placeholder="username"
+      placeholder="Username"
       autocomplete="username"
       required
       <%-
@@ -50,21 +54,23 @@
       %>
     />
   </div>
-  <div>
+  <div class="flex items-center gap-4">
     <label for="password">Password</label>
     <input
       type="password"
       name="password"
+      class="border rounded p-2 "
       id="password"
       placeholder="Password"
       autocomplete="new-password"
       required
     />
   </div>
-  <div>
+  <div class="flex items-center gap-4">
     <label for="confirmPassword">Confirm Password</label>
     <input
       type="password"
+      class="border rounded p-2 "
       name="confirmPassword"
       id="confirmPassword"
       placeholder="Confirm Password"
@@ -81,15 +87,16 @@
     />
   </div>
   <div>
-    <button type="submit">Sign in</button>
+    <button type="submit" class="border rounded p-2 px-4 bg-slate-50 hover:bg-slate-100 active:bg-slate-200">Sign in</button>
   </div>
 </form>
 <% if (errors) { %>
 
-<ul>
+<ul class="list-disc">
   <% errors.forEach(error => { %>
   <li><%- error.msg %></li>
   <% }) %>
 </ul>
+</div>
 
 <% } %> <%- include("footer") %>
