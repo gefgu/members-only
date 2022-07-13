@@ -1,39 +1,48 @@
 <%- include("header", {title: title}) %>
-<h1><%= title %></h1>
-<form action="" method="post">
-  <div>
-    <label for="username">Username</label>
-    <input
-      type="text"
-      name="username"
-      id="username"
-      placeholder="username"
-      autocomplete="username"
-      required
-    />
-  </div>
-  <div>
-    <label for="password">Password</label>
-    <input
-      type="password"
-      name="password"
-      id="password"
-      placeholder="Password"
-      autocomplete="new-password"
-      required
-    />
-  </div>
+<div class="py-4 px-8 xl:px-64 2xl:px-96">
+  <h1 class="text-3xl my-8"><%= title %></h1>
+  <form action="" method="post" class="flex flex-col gap-8">
+    <div class="flex items-center gap-4">
+      <label for="username">Username:</label>
+      <input
+        type="text"
+        name="username"
+        id="username"
+        placeholder="Username"
+        autocomplete="username"
+        class="border rounded p-2 w-full"
+        required
+      />
+    </div>
+    <div class="flex items-center gap-4">
+      <label for="password">Password:</label>
+      <input
+        class="border rounded p-2 w-full"
+        type="password"
+        name="password"
+        id="password"
+        placeholder="Password"
+        autocomplete="new-password"
+        required
+      />
+    </div>
 
-  <div>
-    <button type="submit">Log In</button>
-  </div>
-</form>
-<% if (errors) { %>
+    <div class="w-full px-4 flex justify-end">
+      <button
+        type="submit"
+        class="border rounded p-2 px-4 bg-slate-50 hover:bg-slate-100 active:bg-slate-200"
+      >
+        Log In
+      </button>
+    </div>
+  </form>
+  <% if (errors) { %>
 
-<ul>
-  <% errors.forEach(error => { %>
-  <li><%- error %></li>
-  <% }) %>
-</ul>
+  <ul class="list-disc">
+    <% errors.forEach(error => { %>
+    <li><%- error %></li>
+    <% }) %>
+  </ul>
+</div>
 
 <% } %> <%- include("footer") %>
