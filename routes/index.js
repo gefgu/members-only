@@ -177,6 +177,7 @@ router.post("/admin", [
 ]);
 
 router.get("/message/:id/delete", (req, res, next) => {
+  if (req.user?.membershipStatus !== "admin") res.redirect("/");
   Message.findById(req.params.id)
     .populate("author")
     .exec(function (err, message) {
@@ -195,6 +196,7 @@ router.get("/message/:id/delete", (req, res, next) => {
 });
 
 router.post("/message/:id/delete", (req, res, next) => {
+  if (req.user?.membershipStatus !== "admin") res.redirect("/");
   Message.findById(req.params.id)
     .populate("author")
     .exec(function (err, message) {
