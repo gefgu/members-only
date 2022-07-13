@@ -8,7 +8,11 @@ const passport = require("passport");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  res.render("index", { title: "Members Only" });
+  Message.find({}, "title content timestamp author")
+    .populate("author")
+    .exec((err, messages) => {
+      res.render("index", { title: "Members Only", messages: messages });
+    });
 });
 
 router.get("/sign-up", (req, res) =>

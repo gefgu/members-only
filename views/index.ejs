@@ -12,5 +12,13 @@
     <% if (currentUser) { %>
     <a href="/new-message">Create New Message</a>
     <% } %>
+    <div>
+      <% messages.forEach(message => { %>
+      <div>
+        <h2><%= message.title %></h2>
+        <p><%= message.content %></p>
+      </div>
+      <% }) %>
+    </div>
   </body>
 </html>
