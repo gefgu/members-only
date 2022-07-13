@@ -117,4 +117,24 @@ router.get("/member", (req, res) =>
   res.render("member-form", { title: "Become member", errors: undefined })
 );
 
+router.post("/member", [
+  check("passcode", "Passcode is incorrect")
+    .exists()
+    .custom((value, { req }) => value === process.env.MEMBER_PASSCODE),
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.render("member-form", { title: "Become Member", errors: errors.array() });
+    } else {
+      let newUser = req.user;
+      newUser.membershipStatus = "member";
+      User.findByIdAndUpdate(newUser._id, newUser, {}, function (err) {
+        if (err) return next(err);
+
+        res.redirect("/");
+      });
+    }
+  },
+]);
+
 module.exports = router;
