@@ -23,7 +23,7 @@
       <div>
         <h2><%= message.title %></h2>
         <p><%= message.content %></p>
-        <% if (currentUser?.membershipStatus === "member") { %>
+        <% if (currentUser?.membershipStatus === "member" || currentUser?.membershipStatus === "admin") { %>
         <p>Author: <%= message.author.username %></p>
         <p>Date: <%= message.date %></p>
         <% } %>
