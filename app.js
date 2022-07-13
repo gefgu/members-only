@@ -33,6 +33,16 @@ passport.use(
   })
 );
 
+passport.serializeUser(function (user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function (id, done) {
+  User.findById(id, function (err, user) {
+    done(err, user);
+  });
+});
+
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 
