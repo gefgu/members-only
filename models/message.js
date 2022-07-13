@@ -12,7 +12,7 @@ const MessageSchema = new Schema({
 });
 
 MessageSchema.virtual("date").get(function () {
-  return DateTime.fromJSDate(this.timestamp).toISODate();
+  return DateTime.fromJSDate(this.timestamp).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY);
 });
 
 module.exports = mongoose.model("Message", MessageSchema);
