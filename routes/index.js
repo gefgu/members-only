@@ -60,4 +60,8 @@ router.post("/sign-up", [
   },
 ]);
 
+router.get("/log-in", (req, res) => {
+  res.render("log-in", {title: "Log-In", errors: undefined})
+})
+
 module.exports = router;
