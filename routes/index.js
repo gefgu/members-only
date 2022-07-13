@@ -113,9 +113,10 @@ router.post("/new-message", [
   },
 ]);
 
-router.get("/member", (req, res) =>
-  res.render("member-form", { title: "Become member", errors: undefined })
-);
+router.get("/member", (req, res) => {
+  if (req.user?.membershipStatus !== "visitor") res.redirect("/");
+  res.render("member-form", { title: "Become member", errors: undefined });
+});
 
 router.post("/member", [
   check("passcode", "Passcode is incorrect")
@@ -124,7 +125,10 @@ router.post("/member", [
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.render("member-form", { title: "Become Member", errors: errors.array() });
+      res.render("member-form", {
+        title: "Become Member",
+        errors: errors.array(),
+      });
     } else {
       let newUser = req.user;
       newUser.membershipStatus = "member";
