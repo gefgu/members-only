@@ -1,21 +1,29 @@
 <%- include("header", {title: title})  %> 
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    
+<div class="py-4 px-8 xl:px-64 2xl:px-96">
+    <h2 class="text-4xl w-2/3 leading-relaxed my-8 mb-16">Welcome to the Cosmere Club. The special place for fans to discuss about the fantasy universe of Brandon Sanderson.</h2>
     
     <div>
+      <h2 class="text-2xl">See Latest Messages:</h2>
+      <div class="flex flex-col gap-8 my-10">
       <% messages.forEach(message => { %>
-      <div>
-        <h2><%= message.title %></h2>
-        <p><%= message.content %></p>
+      <div class="w-100 border p-4">
+        <div class="flex justify-between">
+          <h3 class="text-xl mb-2 font-bold"><%= message.title %></h2>
+          <% if (currentUser?.membershipStatus === "admin") { %>
+            <a class="text-red-700 hover:text-red-800 active:text-red-900" href=<%- `/message/${message._id}/delete` %> >Delete Message</a>
+           <% } %>
+        </div>
+        <p class="my-4 leading-8"><%= message.content %></p>
+        
         <% if (currentUser?.membershipStatus === "member" || currentUser?.membershipStatus === "admin") { %>
-        <p>Author: <%= message.author.username %></p>
-        <p>Date: <%= message.date %></p>
-        <% } %>
-        <% if (currentUser?.membershipStatus === "admin") { %>
-         <a href=<%- `/message/${message._id}/delete` %> >Delete Message</a>
+          <div class="flex gap-6">
+            <p><strong>Author:</strong> <%= message.author.username %></p>
+            <p><strong>Date:</strong> <%= message.date %></p>
+          </div>
         <% } %>
       </div>
       <% }) %>
     </div>
+    </div>
+  </div>
 <%- include("footer")  %> 
