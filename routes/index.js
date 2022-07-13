@@ -80,6 +80,13 @@ router.post(
   })
 );
 
+router.get("/log-out", (req, res) => {
+  req.logout(function (err) {
+    if (err) return next(err);
+    res.redirect("/");
+  });
+});
+
 router.get("/new-message", (req, res) => {
   if (!req.user) res.redirect("/");
   res.render("message-form", { title: "Message Form", errors: undefined });
