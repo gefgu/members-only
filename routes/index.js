@@ -33,6 +33,16 @@ router.post("/sign-up", [
     .trim()
     .isLength({ min: 1 })
     .escape(),
+  check("username", "Username is already used").custom((value) => {
+    User.findOne({ username: value }, (err, user) => {
+      if (err) return done(err);
+      if (!user) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }),
   check("password", "Password must have a minimum of 8 characters").isLength({
     min: 8,
   }),
