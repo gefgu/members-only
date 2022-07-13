@@ -76,9 +76,10 @@ router.post(
   })
 );
 
-router.get("/new-message", (req, res) =>
-  res.render("message-form", { title: "Message Form", errors: undefined })
-);
+router.get("/new-message", (req, res) => {
+  if (!req.user) res.redirect("/");
+  res.render("message-form", { title: "Message Form", errors: undefined });
+});
 
 router.post("/new-message", [
   body("title", "Title must be specified").trim().isLength({ min: 1 }).escape(),
