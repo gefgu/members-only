@@ -194,4 +194,17 @@ router.get("/message/:id/delete", (req, res, next) => {
     });
 });
 
+router.post("/message/:id/delete", (req, res, next) => {
+  Message.findById(req.params.id)
+    .populate("author")
+    .exec(function (err, message) {
+      if (err) return next(err);
+
+      Message.findByIdAndRemove(req.body.messageId, (err) => {
+        if (err) return next(err);
+        res.redirect("/");
+      });
+    });
+});
+
 module.exports = router;
