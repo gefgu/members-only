@@ -9,5 +9,8 @@
     <p>Welcome to <%= title %></p>
     <a href="/sign-up">Sign up</a>
     <a href="/log-in">Log In</a>
+    <% if (currentUser) { %>
+    <a href="/new-message">Create New Message</a>
+    <% } %>
   </body>
 </html>
