@@ -176,4 +176,22 @@ router.post("/admin", [
   },
 ]);
 
+router.get("/message/:id/delete", (req, res, next) => {
+  Message.findById(req.params.id)
+    .populate("author")
+    .exec(function (err, message) {
+      if (err) return next(err);
+      if (message === null) {
+        const err = new Error("Messsage not found");
+        err.status = 404;
+        return next(err);
+      }
+
+      res.render("delete-message", {
+        title: "Delete Message",
+        message: message,
+      });
+    });
+});
+
 module.exports = router;
