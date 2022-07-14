@@ -8,7 +8,7 @@
       <% messages.forEach(message => { %>
       <div class="w-100 border rounded p-4">
         <div class="flex justify-between">
-          <h3 class="text-xl mb-2 font-bold"><%= message.title %></h2>
+          <h3 class="text-xl my-2 font-bold"><%= message.title %></h2>
           <% if (currentUser?.membershipStatus === "admin") { %>
             <a class="text-red-700 hover:text-red-800 active:text-red-900" href=<%- `/message/${message._id}/delete` %> >Delete Message</a>
            <% } %>
