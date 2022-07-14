@@ -13,7 +13,10 @@
             <a class="text-red-700 hover:text-red-800 active:text-red-900" href=<%- `/message/${message._id}/delete` %> >Delete Message</a>
            <% } %>
         </div>
-        <p class="my-4 leading-8"><%= message.content %></p>
+
+        <% message.content.replaceAll("\r", "").split("\n").forEach(element => { %>
+          <p class="my-4 leading-8"><%- element %></p>
+        <% }) %>
         
         <% if (currentUser?.membershipStatus === "member" || currentUser?.membershipStatus === "admin") { %>
           <div class="flex gap-6">
