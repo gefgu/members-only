@@ -10,6 +10,10 @@ const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcryptjs");
 const mongoose = require("mongoose");
 const User = require("./models/user");
+var indexRouter = require("./routes/index");
+var usersRouter = require("./routes/users");
+const compression = require("compression");
+const { default: helmet } = require("helmet");
 
 const mongoDb = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.blyci.mongodb.net/members_only?retryWrites=true&w=majority`;
 mongoose.connect(mongoDb, { useNewURLParser: true, useUnifiedTopology: true });
@@ -44,9 +48,6 @@ passport.deserializeUser(function (id, done) {
   });
 });
 
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
-
 var app = express();
 
 // view engine setup
@@ -68,6 +69,8 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.use(compression());
+app.use(helmet());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
